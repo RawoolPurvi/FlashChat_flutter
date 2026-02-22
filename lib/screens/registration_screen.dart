@@ -3,6 +3,8 @@ import 'package:flash_card/screens/RoundedButton.dart';
 import 'package:flash_card/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -61,7 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               RoundedButton(
                 title: 'Register',
                 colour: Colors.blueAccent,
-                onPressed: () async{
+                onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
@@ -70,7 +72,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       email: email,
                       password: password,
                     );
-                    if(newUser != null){
+                    if (newUser != null) {
+                      final token = await FirebaseMessaging.instance.getToken();
+
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(newUser.user!.uid)
+                          .set({'email': email, 'token': token});
                       Navigator.pushNamed(context, '/chat');
                     }
                     setState(() {

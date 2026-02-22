@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {
               //Implement logout functionality
               _auth.signOut();
-              Navigator.pop(context);
+              Navigator.pushNamed(context, '/');
             },
           ),
         ],
@@ -74,13 +74,15 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection('messages').snapshots(),
+              stream: _firestore
+              .collection('messages')
+              .orderBy('timestamp', descending: true)
+              .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final messages = snapshot
                       .data!
-                      .docs
-                      .reversed; //to show the latest message at the bottom
+                      .docs;
                   List<MessageBubble> messageWidgets = [];
                   for (var message in messages) {
                     final messageText = message.get('text');
@@ -132,6 +134,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser!.email,
+                        'timestamp': FieldValue.serverTimestamp(),
+                        //  VERY IMPORTANT: Use FieldValue.serverTimestamp() NOT DateTime.now() (because device clocks differ)
                       });
                     },
                     child: Text('Send', style: kSendButtonTextStyle),

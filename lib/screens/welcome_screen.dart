@@ -67,16 +67,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                     height: animation!.value * 100,
                   ),
                 ),
-                AnimatedTextKit(
-                  repeatForever: true,
-                  animatedTexts: [
-                    TypewriterAnimatedText('Flash Chat',
-                    textStyle: TextStyle(
-                      fontSize: 65.0,
-                      fontWeight: FontWeight.w900,
-                    ),
-                    ),
-                  ],
+                Expanded(
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      TypewriterAnimatedText('Flash Chat',
+                      textStyle: TextStyle(
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w900,
+                      ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

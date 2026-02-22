@@ -3,6 +3,8 @@ import 'package:flash_card/screens/RoundedButton.dart';
 import 'package:flash_card/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -66,8 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     showSpinner = true;
                   });
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                    if(user !=null){
+                    final user = await _auth.signInWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                    );
+                    if (user != null) {
+                      final token = await FirebaseMessaging.instance.getToken();
+
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user.user!.uid)
+                          .update({'token': token});
                       Navigator.pushNamed(context, '/chat');
                     }
                     setState(() {
