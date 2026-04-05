@@ -1,16 +1,23 @@
-# flash_card
+💬 FlashChat
 
-A new Flutter project.
+A real-time chat application built using Flutter and Dart that allows users to communicate instantly through a cloud-based messaging system. The app integrates authentication and real-time messaging using Firebase services, providing a secure and responsive chat experience.
 
-## Getting Started
+✨ Features
+User authentication (sign up and login)
+Real-time messaging
+Cloud-based message storage
+Animated UI elements
+Push notifications for new messages
+📦 Packages Used
+firebase_core – Initialize Firebase services
+firebase_auth – User authentication
+cloud_firestore – Real-time database for messages
+firebase_messaging – Push notifications
+animated_text_kit – Animated text effects
+modal_progress_hud_nsn – Loading indicators
+cupertino_icons – iOS style icons
+flutter_launcher_icons – App launcher icons
+<img width="489" height="482" alt="Screenshot 2026-04-05 222918" src="https://github.com/user-attachments/assets/f3aaffcf-e554-49e1-bd14-461de424bd6c" />
+<img width="211" height="488" alt="Screenshot 2026-04-05 222619" src="https://github.com/user-attachments/assets/b57377df-0b5d-4803-bbeb-1bbd8789fd90" />
+<img width="206" height="463" alt="Screenshot 2026-04-05 222422" src="https://github.com/user-attachments/assets/5883be06-4e3d-4bd1-87a4-349a5a48e820" />
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
